@@ -1,0 +1,308 @@
+/* Global styles for Kanbanium */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Dark Mode: CSS Variables for theming */
+:root {
+  /* Light mode colors */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f5f5f5;
+  --color-bg-tertiary: #fafafa;
+  --color-bg-elevated: #ffffff;
+  --color-text-primary: #000000;
+  --color-text-secondary: #666666;
+  --color-text-tertiary: #999999;
+  --color-border-primary: #d9d9d9;
+  --color-border-secondary: #f0f0f0;
+  --color-shadow: rgba(0, 0, 0, 0.1);
+  --color-hover-bg: rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="dark"] {
+  /* Dark mode colors */
+  --color-bg-primary: #1f1f1f;
+  --color-bg-secondary: #2a2a2a;
+  --color-bg-tertiary: #262626;
+  --color-bg-elevated: #2a2a2a;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #a0a0a0;
+  --color-text-tertiary: #707070;
+  --color-border-primary: #3a3a3a;
+  --color-border-secondary: #2a2a2a;
+  --color-shadow: rgba(0, 0, 0, 0.3);
+  --color-hover-bg: rgba(255, 255, 255, 0.08);
+}
+
+/* Apply theme colors to body */
+body {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+}
+
+/* Accessibility: Enhanced focus indicators for keyboard navigation */
+*:focus-visible {
+  outline: 2px solid #1677ff;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Button focus */
+button:focus-visible {
+  outline: 2px solid #1677ff;
+  outline-offset: 2px;
+}
+
+/* Input focus */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid #1677ff;
+  outline-offset: 0px;
+  box-shadow: 0 0 0 2px rgba(22, 119, 255, 0.2);
+}
+
+/* Link focus */
+a:focus-visible {
+  outline: 2px solid #1677ff;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Remove default outline for mouse users */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Ant Design overrides for better accessibility */
+.ant-btn:focus-visible {
+  outline: 2px solid #1677ff;
+  outline-offset: 2px;
+}
+
+.ant-card:focus-visible {
+  outline: 2px solid #1677ff;
+  outline-offset: 2px;
+}
+
+.ant-menu-item:focus-visible {
+  outline: 2px solid #1677ff !important;
+  outline-offset: -2px;
+}
+
+/* Draggable items focus */
+[draggable="true"]:focus-visible {
+  outline: 2px solid #1677ff;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(22, 119, 255, 0.1);
+}
+
+/* Skip link visible on focus */
+.skip-link:focus {
+  clip: auto;
+  height: auto;
+  width: auto;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 9999;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Mobile Responsiveness - Minimum width: 360px */
+@media (max-width: 767px) {
+  /* Typography adjustments */
+  body {
+    font-size: 14px;
+  }
+
+  h1, .ant-typography h1 {
+    font-size: 24px !important;
+  }
+
+  h2, .ant-typography h2 {
+    font-size: 20px !important;
+  }
+
+  h3, .ant-typography h3 {
+    font-size: 18px !important;
+  }
+
+  /* Touch-friendly button sizes */
+  .ant-btn {
+    min-height: 40px;
+    padding: 8px 16px;
+  }
+
+  .ant-btn-sm {
+    min-height: 32px;
+    padding: 4px 12px;
+  }
+
+  .ant-btn-lg {
+    min-height: 48px;
+    padding: 10px 20px;
+  }
+
+  /* Touch-friendly input sizes */
+  .ant-input,
+  .ant-input-number-input,
+  .ant-select-selector {
+    min-height: 40px;
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+
+  /* Card adjustments */
+  .ant-card {
+    margin-bottom: 12px;
+  }
+
+  .ant-card-body {
+    padding: 16px;
+  }
+
+  /* Modal full-screen on mobile */
+  .ant-modal {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    top: 0 !important;
+  }
+
+  .ant-modal-content {
+    border-radius: 0 !important;
+    min-height: 100vh;
+  }
+
+  .ant-modal-body {
+    max-height: calc(100vh - 110px);
+    overflow-y: auto;
+  }
+
+  /* Drawer optimizations */
+  .ant-drawer-content-wrapper {
+    width: 85% !important;
+    max-width: 320px;
+  }
+
+  /* Table horizontal scroll */
+  .ant-table-wrapper {
+    overflow-x: auto;
+  }
+
+  /* Form optimizations */
+  .ant-form-item {
+    margin-bottom: 16px;
+  }
+
+  /* Space adjustments */
+  .ant-space-item {
+    margin-right: 8px !important;
+  }
+
+  /* Avatar sizes */
+  .ant-avatar {
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+  }
+
+  .ant-avatar-lg {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+  }
+
+  /* Dropdown adjustments */
+  .ant-dropdown {
+    min-width: 200px;
+  }
+
+  /* Menu adjustments for mobile drawer */
+  .ant-menu-inline {
+    border-right: none !important;
+  }
+
+  /* Pagination for mobile */
+  .ant-pagination {
+    font-size: 12px;
+  }
+
+  .ant-pagination-item {
+    min-width: 32px;
+    height: 32px;
+    line-height: 30px;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .ant-card-body {
+    padding: 20px;
+  }
+
+  .ant-modal {
+    max-width: 90% !important;
+  }
+}
+
+/* Small mobile devices (360px - 480px) */
+@media (max-width: 480px) {
+  /* Even more compact spacing */
+  .ant-card-body {
+    padding: 12px;
+  }
+
+  .ant-space {
+    gap: 8px !important;
+  }
+
+  /* Stack buttons vertically on very small screens */
+  .ant-space-horizontal {
+    flex-direction: column;
+    align-items: stretch !important;
+  }
+
+  .ant-space-horizontal .ant-space-item {
+    margin-right: 0 !important;
+    margin-bottom: 8px;
+  }
+
+  /* Full-width buttons on small screens */
+  .ant-btn-block {
+    width: 100%;
+  }
+}
+
+/* Landscape mobile */
+@media (max-height: 600px) and (orientation: landscape) {
+  .ant-modal-body {
+    max-height: calc(100vh - 60px);
+  }
+}

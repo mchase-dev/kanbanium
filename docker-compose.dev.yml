@@ -1,0 +1,56 @@
+version: '3.8'
+
+# Development override configuration
+# Usage: docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+
+services:
+  # Remove database service and use SQLite instead
+  db:
+    profiles:
+      - donotstart  # This effectively disables the db service in dev mode
+
+  # Backend with development settings
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      target: build  # Use build stage for hot reload capability
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      Database__Provider: Sqlite
+      ConnectionStrings__DefaultConnection: Data Source=/app/data/kanbanium.db
+      # Remove PostgreSQL dependency
+    volumes:
+      # Mount source code for hot reload (optional - requires dotnet watch)
+      - ./backend:/src:ro
+      # Mount SQLite database to host for persistence
+      - ./backend/data:/app/data
+      # Mount logs
+      - ./backend/logs:/app/logs
+    depends_on:
+      # Remove database dependency
+      db:
+        condition: service_started
+        required: false
+    command: ["dotnet", "watch", "run", "--project", "/src/Kanbanium.csproj", "--no-hot-reload"]
+    ports:
+      - "5124:5124"
+      - "7138:7138"  # HTTPS port for development
+
+  # Frontend with development server
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: build  # Use build stage
+    environment:
+      - VITE_API_URL=http://localhost:5124/api
+    volumes:
+      # Mount source code for hot reload
+      - ./frontend:/app:ro
+      - /app/node_modules  # Prevent overwriting node_modules
+    command: ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
+    ports:
+      - "5173:5173"  # Vite dev server port
+    depends_on:
+      - backend

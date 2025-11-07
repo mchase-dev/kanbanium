@@ -1,0 +1,47 @@
+# Build outputs
+bin/
+obj/
+out/
+publish/
+
+# IDE and editor files
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Logs and databases
+logs/
+*.log
+*.db
+*.db-shm
+*.db-wal
+kanbanium.db*
+
+# Test results
+TestResults/
+**/TestResults/
+
+# NuGet packages
+*.nupkg
+*.snupkg
+packages/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Migration scripts (excluded as they're handled by entrypoint)
+migrate.sh
+
+# Documentation
+*.md
+!README.md
