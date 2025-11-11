@@ -1,6 +1,6 @@
 # Kanbanium
 
-A modern, full-featured Kanban board application inspired by Trello and Jira, built with .NET 8 and React.
+A Kanban board Demo application inspired by Trello and Jira, built with .NET 8 and React.
 
 ## Features
 
@@ -33,6 +33,8 @@ A modern, full-featured Kanban board application inspired by Trello and Jira, bu
 - **API Documentation**: Interactive Swagger/OpenAPI documentation
 - **Modern UI**: Built with Ant Design 5.0 components
 - **Fast Performance**: Optimized with React Query caching
+
+**⚠️ Important**: This is a **demonstration project**, not production-ready software.
 
 ---
 
